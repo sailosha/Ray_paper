@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>大钹 Dàbá — Harmonograph</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #0a0a0c;
+      color: #e8d9b8;
+      font-family: "Georgia", serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      padding: 16px 24px;
+      width: 100%;
+      max-width: 1000px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    h1 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin: 0;
+      color: #d7913a;
+    }
+    a.back {
+      color: #8a7d63;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    a.back:hover { color: #d7913a; }
+    main { width: 100%; display: flex; justify-content: center; }
+    canvas { max-width: 100%; height: auto; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>大钹 Dàbá — large cymbal</h1>
+    <a class="back" href="index.html">← back</a>
+  </header>
+  <main></main>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+  <script src="code/daba.js"></script>
+</body>
+</html>
