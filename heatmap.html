@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Frequency Heatmap — Harmonograph</title>
+  <style>
+    :root {
+      --bg: #0a0a0c;
+      --fg: #e8d9b8;
+      --accent: #d7913a;
+      --muted: #8a7d63;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Georgia", "Times New Roman", serif;
+      min-height: 100vh;
+    }
+    header {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 24px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin: 0;
+      color: var(--accent);
+    }
+    a.back {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    a.back:hover { color: var(--accent); }
+
+    .intro {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .controls {
+      max-width: 900px;
+      margin: 20px auto 16px;
+      padding: 0 24px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .instrument-btn {
+      background: transparent;
+      border: 1px solid rgba(215, 145, 58, 0.35);
+      color: var(--fg);
+      font-family: inherit;
+      font-size: 0.95rem;
+      padding: 10px 18px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .instrument-btn:hover {
+      background: rgba(215, 145, 58, 0.08);
+      border-color: var(--accent);
+    }
+    .instrument-btn.active {
+      background: rgba(215, 145, 58, 0.18);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .instrument-btn .cn {
+      font-size: 1.05rem;
+      margin-right: 6px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+    #sketch-container {
+      display: flex;
+      justify-content: center;
+    }
+    #sketch-container canvas {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .legend {
+      max-width: 900px;
+      margin: 24px auto 0;
+      padding: 16px 24px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      border-top: 1px solid rgba(215, 145, 58, 0.15);
+    }
+    .legend strong { color: var(--fg); font-weight: normal; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Frequency Heatmap</h1>
+    <a class="back" href="index.html">← back</a>
+  </header>
+
+  <p class="intro">
+    Two views of the same sound. <strong style="color:var(--fg)">Top:</strong> a density map of the
+    harmonograph trace — brighter regions are where the curve passes more often, revealing where the
+    standing-wave pattern concentrates its energy.
+    <strong style="color:var(--fg)">Bottom:</strong> the raw frequency spectrum, with each harmonic
+    plotted at its measured Hz and the bar height scaled by acoustic amplitude
+    (<code style="background:rgba(255,255,255,0.05);padding:1px 5px">amp = 10<sup>dB/20</sup></code>),
+    so the tallest bar is genuinely the loudest harmonic in the sound.
+  </p>
+
+  <div class="controls">
+    <button class="instrument-btn active" data-instrument="hutouluo" onclick="selectInstrument('hutouluo')">
+      <span class="cn">虎音锣</span>Hǔyīnluó
+    </button>
+    <button class="instrument-btn" data-instrument="bianzhong" onclick="selectInstrument('bianzhong')">
+      <span class="cn">编钟</span>Biānzhōng
+    </button>
+    <button class="instrument-btn" data-instrument="daba" onclick="selectInstrument('daba')">
+      <span class="cn">大钹</span>Dàbá
+    </button>
+  </div>
+
+  <main>
+    <div id="sketch-container"></div>
+  </main>
+
+  <p class="legend">
+    <strong>Reading the heatmap.</strong>
+    The harmonograph traces a single closed (or near-closed) Lissajous figure determined by the
+    harmonics. Where the curve loops back over itself or slows down, pixels are visited many times
+    and glow yellow-white; sparsely traced regions stay dark purple. The same color scale is used
+    for the spectrum bars, so the loudest harmonic is also the brightest bar — the sketch above and
+    the chart below are two complementary readings of the same sound.
+  </p>
+
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+  <script src="code/heatmap.js"></script>
+</body>
+</html>
