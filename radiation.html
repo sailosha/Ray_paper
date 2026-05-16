@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spectral Radiation Map — Harmonograph</title>
+  <style>
+    :root {
+      --bg: #06040c;
+      --fg: #e8d9b8;
+      --accent: #d7913a;
+      --muted: #8a7d63;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Georgia", "Times New Roman", serif;
+      min-height: 100vh;
+    }
+    header {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 24px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin: 0;
+      color: var(--accent);
+    }
+    a.back {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    a.back:hover { color: var(--accent); }
+
+    .intro {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 24px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.95rem;
+    }
+    .intro strong { color: var(--fg); font-weight: normal; }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 12px 60px;
+    }
+    #sketch-container {
+      display: flex;
+      justify-content: center;
+    }
+    #sketch-container canvas {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .legend-text {
+      max-width: 1200px;
+      margin: 24px auto 0;
+      padding: 16px 24px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.7;
+      border-top: 1px solid rgba(215, 145, 58, 0.15);
+    }
+    .legend-text strong { color: var(--fg); font-weight: normal; }
+    .legend-text code {
+      background: rgba(255,255,255,0.05);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 0.88em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Spectral Radiation Map</h1>
+    <a class="back" href="index.html">← back</a>
+  </header>
+
+  <p class="intro">
+    Each instrument is plotted like an isotope on a radiation survey. Every harmonic in its spectrum
+    becomes a glowing point source whose <strong>color</strong> is its frequency
+    (low&nbsp;Hz&nbsp;=&nbsp;red, mid&nbsp;=&nbsp;yellow / green, high&nbsp;=&nbsp;blue / violet,
+    mapped log-scaled across&nbsp;150–2000&nbsp;Hz), whose <strong>position on the ring</strong>
+    is also its frequency (same log scale, going clockwise from 12&nbsp;o&#39;clock), and whose
+    <strong>glow size and brightness</strong> follow its acoustic amplitude. Reading the three
+    panels side by side, the differences in spectral fingerprint between the instruments become
+    immediately visible.
+  </p>
+
+  <main>
+    <div id="sketch-container"></div>
+  </main>
+
+  <p class="legend-text">
+    <strong>How to read it.</strong>
+    Each colored hotspot is one overtone. Because the position and color both encode frequency, the
+    <em>same</em> frequency always lands at the <em>same</em> place with the <em>same</em> color
+    across all three maps — so comparing two instruments is a matter of asking <em>which positions
+    light up, and how brightly</em>. A bell with one dominant fundamental will show one huge
+    blob and a few faint outriders; a cymbal or gong with several near-equal harmonics will show a
+    constellation of comparably-sized blobs. Intensities are normalized within each panel so even
+    quiet harmonics stay visible — the bottom-of-panel readout (<code>peak XX.X dB</code>) preserves
+    the cross-instrument loudness comparison.
+  </p>
+
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+  <script src="code/radiation.js"></script>
+</body>
+</html>
